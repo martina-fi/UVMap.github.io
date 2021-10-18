@@ -56,11 +56,16 @@
             tip: las funciones floor() y mod() pueden ser de utilizada
 
        */
-       auxUv *= 0.5;
 
 
-       vUv = auxUv;
-       gl_Position = projectionMatrix * modelViewMatrix * aux;
+        auxUv *= 0.25; // Ajusto la imagen para que un cuadro tenga el tamaño de la cara del cubo
+        float adjFactor = 7.;
+
+        auxUv.x += mod(floor(frame/adjFactor),4.)*0.25;
+        auxUv.y += mod(-floor(frame/(adjFactor/0.25)), 4.)*0.25;
+
+        vUv = auxUv;
+        gl_Position = projectionMatrix * modelViewMatrix * aux;
        
     }
 
